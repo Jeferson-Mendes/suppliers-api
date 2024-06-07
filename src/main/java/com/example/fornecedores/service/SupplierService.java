@@ -1,6 +1,7 @@
 package com.example.fornecedores.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,12 @@ public class SupplierService {
 		return supplierRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
 	}
 	
-	public Supplier findById(Long id) throws BadRequestException {
-		return supplierRepository.findById(id).orElseThrow(() -> new BadRequestException("Supplier not found."));
+	public Optional<Supplier> findById(Long id) throws BadRequestException {
+		return supplierRepository.findById(id);
 	}
 	
 	public Supplier update(Long id, Supplier supplier) throws BadRequestException {
-		Supplier supplierRecord = findById(id);
+		Supplier supplierRecord = findById(id).orElseThrow(() -> new BadRequestException("Supplier not found."));
 		
 		supplierRecord.name = supplier.name;
 		supplierRecord.category = supplier.category;
@@ -40,7 +41,7 @@ public class SupplierService {
 	}
 	
 	public void delete(Long id) throws BadRequestException {
-		findById(id);
+		findById(id).orElseThrow(() -> new BadRequestException("Supplier not found"));
 		supplierRepository.deleteById(id);
 	}
 
