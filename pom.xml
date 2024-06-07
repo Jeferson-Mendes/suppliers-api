@@ -14,7 +14,7 @@
 	<name>fornecedores</name>
 	<description>Modulo de cadastro de fornecedores para um sistema de gestão de processos de uma organização</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
