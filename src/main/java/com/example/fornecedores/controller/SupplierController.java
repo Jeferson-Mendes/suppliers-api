@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.fornecedores.model.Supplier;
+import com.example.fornecedores.model.SupplierCategory;
 import com.example.fornecedores.service.SupplierService;
 
 import jakarta.validation.Valid;
@@ -57,7 +58,7 @@ public class SupplierController {
 		@RequestParam int size
 		) {
 		
-		List<Supplier> suppliers = supplierService.findByCategory(category, page, size);
+		List<Supplier> suppliers = supplierService.findByCategory(SupplierCategory.valueOf(category), page, size);
 		return ResponseEntity.ok(suppliers);
 	}
 	

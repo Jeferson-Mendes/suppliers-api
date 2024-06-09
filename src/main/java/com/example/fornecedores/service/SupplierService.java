@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.fornecedores.model.Supplier;
+import com.example.fornecedores.model.SupplierCategory;
 import com.example.fornecedores.repository.SupplierRepository;
 
 @Service
@@ -31,7 +32,7 @@ public class SupplierService {
 		return supplierRepository.findAll(searchTerm, pageRequest);
 	}
 
-	public List<Supplier> findByCategory(String category, int page, int size) {
+	public List<Supplier> findByCategory(SupplierCategory category, int page, int size) {
 		PageRequest pageRequest = PageRequest
 		.of(
 			page,
@@ -49,6 +50,7 @@ public class SupplierService {
 		Supplier supplierRecord = findById(id).orElseThrow(() -> new BadRequestException("Supplier not found."));
 		
 		supplierRecord.name = supplier.name;
+		supplierRecord.description = supplier.description;
 		supplierRecord.category = supplier.category;
 		supplierRecord.fullAddress = supplier.fullAddress;
 		supplierRecord.phoneNumber = supplier.phoneNumber;
